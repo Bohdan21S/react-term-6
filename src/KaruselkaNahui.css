@@ -1,0 +1,6 @@
+.carousel-item img{
+    height: 80vh;
+    width: 100%;
+    object-fit: cover;
+    transition: fade 0.3s ease-in-out;
+}

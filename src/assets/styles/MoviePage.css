@@ -1,0 +1,45 @@
+/* FilmPage.css */
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  .banner-button {
+    z-index: 1;
+  }
+  
+  .embed-responsive {
+    margin-top: 20px;
+  }
+  
+  .film-info {
+    margin-top: 20px;
+  }
+  
+  .film-info img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .review-section {
+    margin-top: 40px;
+  }
+  
+  .review-section h2 {
+    margin-bottom: 20px;
+  }
+  
+  .review-section form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .review-section form .form-group {
+    margin-bottom: 20px;
+  }
+  

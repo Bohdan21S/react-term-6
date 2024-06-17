@@ -1,0 +1,25 @@
+#NASTYA {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #4CAF50; /* зеленый цвет фона */
+  color: white; /* белый цвет текста */
+  border: 2px solid #4CAF50; /* зеленая рамка */
+  border-radius: 5px; /* скругленные углы */
+  cursor: pointer; /* указатель при наведении */
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* плавные переходы */
+}
+
+#NASTYA:hover {
+  background-color: #3e1aa3; /* темнозеленый при наведении */
+  border-color: #45a049; /* темнозеленая рамка при наведении */
+  color: white; /* белый текст при наведении */
+}
+#NASTYA:hover span {
+    display: none; /* скрываем текст, который не нужен при наведении */
+}
+#NASTYA:hover::after {
+    content: 'Новый текст'; /* добавляем новый текст */
+}

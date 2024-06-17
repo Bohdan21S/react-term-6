@@ -1,0 +1,29 @@
+Navbar{
+    height: 10vh;
+}
+
+#h{
+    height: 10vh;
+}
+
+#container{
+    margin-left: 5%;
+}
+
+#h {
+    padding: 10px 0;
+  }
+  
+  #h .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  #h .nav-link {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  
+  #h .nav-link:hover {
+    color: rgba(255, 255, 255, 1);
+  }
+  
