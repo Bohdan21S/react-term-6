@@ -11,6 +11,10 @@ import MoviePage from "./pages/MoviePage";
 
 import img4 from './assets/images/image5.webp';
 import img6 from './assets/images/image6.png';
+
+import { useParams } from "react-router-dom";
+
+
 const moviesList = [
   {
     id: 1,
@@ -49,10 +53,11 @@ const moviesList = [
 
 const films = [
   {
+    id: 1,
     title: "Inception",
     banner: "https://static1.colliderimages.com/wordpress/wp-content/uploads/the-avengers-movie-poster-banners-slice-03.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5",
     trailerUrl: "https://www.youtube.com/embed/YoHD9XEInc0",
-    poster: "https://image.url/inception-poster.jpg",
+    poster: "https://i.ebayimg.com/images/g/~WwAAOSw4S1k3rB6/s-l1600.webp",
     ageLimit: "13+",
     genre: "Sci-Fi, Thriller",
     duration: "148 min",
@@ -64,6 +69,7 @@ const films = [
     description: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O."
   },
   {
+    id: 2,
     title: "The Dark Knight",
     banner: "https://static1.colliderimages.com/wordpress/wp-content/uploads/the-avengers-movie-poster-banners-slice-03.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5",
     trailerUrl: "https://www.youtube.com/embed/EXeTwQWrcwY",
@@ -79,6 +85,7 @@ const films = [
     description: "When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham."
   },
   {
+    id: 3,
     title: "Interstellar",
     banner: "https://static1.colliderimages.com/wordpress/wp-content/uploads/the-avengers-movie-poster-banners-slice-03.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5",
     trailerUrl: "https://www.youtube.com/embed/zSWdZVtXT7E",
@@ -94,6 +101,7 @@ const films = [
     description: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
   },
   {
+    id: 4,
     title: "The Matrix",
     banner: "https://static1.colliderimages.com/wordpress/wp-content/uploads/the-avengers-movie-poster-banners-slice-03.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5",
     trailerUrl: "https://www.youtube.com/embed/vKQi3bBA1y8",
@@ -109,6 +117,7 @@ const films = [
     description: "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers."
   },
   {
+    id: 5,
     title: "The Shawshank Redemption",
     banner: "https://static1.colliderimages.com/wordpress/wp-content/uploads/the-avengers-movie-poster-banners-slice-03.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5",
     trailerUrl: "https://www.youtube.com/embed/6hB3S9bIaco",
@@ -144,9 +153,10 @@ function App() {
         }} /> */}
 
 
-        <Route path="/movies/:id" element={<MoviePage moviesData={films}/>} />
+        <Route path="/movies/:id" element={<MoviePageWrapper/>} />
 
-
+        {/* const { id } = useParams();
+        const film = moviesData && moviesData.find(movie => movie.id === parseInt(id)); */}
 
 
 
@@ -156,6 +166,17 @@ function App() {
 
     </Router>
   );
+}
+
+function MoviePageWrapper() {
+  // Access the id parameter from the URL
+  let { id } = useParams();
+
+  // Find the film object with the matching id
+  const film = films.find(film => film.id === parseInt(id));
+
+  // Render the MoviePage component with the found film object
+  return <MoviePage film={film} />;
 }
 
 export default App;

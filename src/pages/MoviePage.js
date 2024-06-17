@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import "../assets/styles/MoviePage.css";
 import Header from '../components/Header';
+import { FaPlay } from 'react-icons/fa'; // Бібліотека для значків
 
 import { useParams } from 'react-router-dom';
 
-const MoviePage = ({ moviesData }) => {
+
+const MoviePage = ({ film }) => {
   const [trailerVisible, setTrailerVisible] = useState(false);
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(1);
 
-  const { id } = useParams();
-  alert("id");
-  const film = moviesData && moviesData.find(movie => movie.id === parseInt(id));
+  // const { id } = useParams();
+  // const film = moviesData && moviesData.find(movie => movie.id === parseInt(id));
 
   const handleTrailerClick = () => {
     setTrailerVisible(true);
@@ -29,14 +30,16 @@ const MoviePage = ({ moviesData }) => {
     <>
       <Header />
       <Container fluid className="p-0">
-        <div
-          className="banner"
-          style={{ backgroundImage: `url(${film.banner})` }}
-        >
-          <Button variant="primary" className="banner-button" onClick={handleTrailerClick}>
-            Play Trailer
-          </Button>
-        </div>
+        {!trailerVisible && (
+          <div
+            className="banner"
+            style={{ backgroundImage: `url(${film.banner})` }}
+          >
+            <Button variant="primary" className="banner-button" onClick={handleTrailerClick}>
+              <FaPlay />
+            </Button>
+          </div>
+        )}
         {trailerVisible && (
           <div className="embed-responsive embed-responsive-16by9 my-4">
             <iframe
