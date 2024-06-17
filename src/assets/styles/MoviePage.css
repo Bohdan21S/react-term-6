@@ -1,45 +1,92 @@
 /* FilmPage.css */
+body {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+h1{
+  font-size: 3.5rem;
+  margin-top: 3%;
+  margin-bottom: 5%;
+}
+
 .banner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 400px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-  }
-  
-  .banner-button {
-    z-index: 1;
-  }
-  
-  .embed-responsive {
-    margin-top: 20px;
-  }
-  
-  .film-info {
-    margin-top: 20px;
-  }
-  
-  .film-info img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .review-section {
-    margin-top: 40px;
-  }
-  
-  .review-section h2 {
-    margin-bottom: 20px;
-  }
-  
-  .review-section form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .review-section form .form-group {
-    margin-bottom: 20px;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.banner-button {
+  z-index: 1;
+  font-size: 2rem;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.banner-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.embed-responsive {
+  height: 600px;
+}
+
+.film-info {
+  margin-top: 20px;
+}
+
+.film-info img {
+  max-width: 100%;
+  height: auto;
+}
+
+.review-section {
+  margin-top: 40px;
+}
+
+.review-section h2 {
+  margin-bottom: 20px;
+}
+
+.review-section form {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-section form .form-group {
+  margin-bottom: 20px;
+}
+
+.review-section form .star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.review-section form .star-rating input {
+  display: none;
+}
+
+.review-section form .star-rating label {
+  font-size: 2rem;
+  color: #25220f;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.review-section form .star-rating input:checked ~ label {
+  color: #FFD700;
+}
+
+.review-section form .star-rating label:hover,
+.review-section form .star-rating label:hover ~ label {
+  color: #FFED85;
+}

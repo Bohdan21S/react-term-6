@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import "../assets/styles/MoviePage.css";
+import { FaPlay } from 'react-icons/fa';
 import Header from '../components/Header';
-import { FaPlay } from 'react-icons/fa'; // Бібліотека для значків
-
-import { useParams } from 'react-router-dom';
-
+import Footer from '../components/Footer';
+import "../assets/styles/MoviePage.css";
 
 const MoviePage = ({ film }) => {
   const [trailerVisible, setTrailerVisible] = useState(false);
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(1);
-
-  // const { id } = useParams();
-  // const film = moviesData && moviesData.find(movie => movie.id === parseInt(id));
+  const [reviews, setReviews] = useState([
+    { id: 1, user: 'John Doe', rating: 8, comment: 'Great movie!' },
+    { id: 2, user: 'Jane Smith', rating: 7, comment: 'Enjoyed it a lot.' },
+    { id: 3, user: 'Alice Johnson', rating: 9, comment: 'Must-watch!' }
+  ]);
 
   const handleTrailerClick = () => {
     setTrailerVisible(true);
@@ -21,9 +21,25 @@ const MoviePage = ({ film }) => {
 
   const handleReviewSubmit = (e) => {
     e.preventDefault();
-    console.log('Review:', review, 'Rating:', rating);
+    if (review.trim() === '') return; // Prevent empty reviews
+
+    const newReview = {
+      id: Date.now(), // Unique identifier (can be timestamp)
+      user: 'Current User', // Replace with actual user info
+      rating,
+      comment: review
+    };
+
+    // Add new review to the beginning of the reviews list
+    setReviews([newReview, ...reviews]);
     setReview('');
     setRating(1);
+  };
+
+  const handleDeleteReview = (reviewId) => {
+    // Filter out the review to delete based on its id
+    const updatedReviews = reviews.filter(review => review.id !== reviewId);
+    setReviews(updatedReviews);
   };
 
   return (
@@ -47,6 +63,7 @@ const MoviePage = ({ film }) => {
               src={film.trailerUrl}
               allowFullScreen
               title="Trailer"
+              style={{ width: "100%", height: "100%" }}
             ></iframe>
           </div>
         )}
@@ -66,11 +83,26 @@ const MoviePage = ({ film }) => {
             <p><strong>Режисер:</strong> {film.director}</p>
             <p><strong>Актори:</strong> {film.actors.join(', ')}</p>
             <p><strong>Рейтинги:</strong> {film.ratings}</p>
-            <p>{film.description}</p>
+            <p><strong>Опис фільму:</strong> {film.description}</p>
           </Col>
         </Row>
         <div className="review-section">
-          <h2>Залишити відгук</h2>
+          <h2>Відгуки</h2>
+          {/* Display existing reviews */}
+          {reviews.map(review => (
+            <div key={review.id} className="review-item">
+              <p><strong>{review.user}</strong> оцінив на {review.rating}/10:</p>
+              <p>{review.comment}</p>
+              {/* Display delete button only for user's own reviews */}
+              {review.user === 'Current User' && (
+                <Button variant="danger" size="sm" onClick={() => handleDeleteReview(review.id)}>
+                  Видалити відгук
+                </Button>
+              )}
+              <hr />
+            </div>
+          ))}
+          {/* Review form */}
           <Form onSubmit={handleReviewSubmit}>
             <Form.Group controlId="reviewTextarea">
               <Form.Label>Ваш відгук</Form.Label>
@@ -83,17 +115,21 @@ const MoviePage = ({ film }) => {
             </Form.Group>
             <Form.Group controlId="ratingSelect">
               <Form.Label>Оцінка</Form.Label>
-              <Form.Control
-                as="select"
-                value={rating}
-                onChange={(e) => setRating(e.target.value)}
-              >
-                {[...Array(10).keys()].map((num) => (
-                  <option key={num + 1} value={num + 1}>
-                    {num + 1}
-                  </option>
+              <div className="star-rating">
+                {[...Array(10)].map((_, i) => (
+                  <React.Fragment key={i}>
+                    <input
+                      type="radio"
+                      id={`star${10 - i}`}
+                      name="rating"
+                      value={10 - i}
+                      checked={rating === 10 - i}
+                      onChange={() => setRating(10 - i)}
+                    />
+                    <label htmlFor={`star${10 - i}`}>★</label>
+                  </React.Fragment>
                 ))}
-              </Form.Control>
+              </div>
             </Form.Group>
             <Button variant="primary" type="submit">
               Відправити
@@ -101,6 +137,7 @@ const MoviePage = ({ film }) => {
           </Form>
         </div>
       </Container>
+      <Footer />
     </>
   );
 };

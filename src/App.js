@@ -55,7 +55,7 @@ const films = [
   {
     id: 1,
     title: "Inception",
-    banner: "https://static1.colliderimages.com/wordpress/wp-content/uploads/the-avengers-movie-poster-banners-slice-03.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5",
+    banner: "https://images.squarespace-cdn.com/content/v1/5ec686197f8b2976074846c2/1618809593080-N5PB8CWYOW3OPDE2TT6E/Feature+3-1.png",
     trailerUrl: "https://www.youtube.com/embed/YoHD9XEInc0",
     poster: "https://i.ebayimg.com/images/g/~WwAAOSw4S1k3rB6/s-l1600.webp",
     ageLimit: "13+",
@@ -66,7 +66,7 @@ const films = [
     director: "Christopher Nolan",
     actors: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page"],
     ratings: "8.8",
-    description: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O."
+    description: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O. Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction, stealing valuable secrets from deep within the subconscious during the dream state, when the mind is at its most vulnerable. Cobb's rare ability has made him a coveted player in this treacherous new world of corporate espionage, but it has also made him an international fugitive and cost him everything he has ever loved. Now Cobb is being offered a chance at redemption. One last job could give him his life back but only if he can accomplish the impossible, inception. Instead of the perfect heist, Cobb and his team of specialists have to pull off the reverse: their task is not to steal an idea, but to plant one."
   },
   {
     id: 2,
