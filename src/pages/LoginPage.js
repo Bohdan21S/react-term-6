@@ -1,42 +1,53 @@
-import React from 'react';
-import { Form, Button, Container, Row, Col, InputGroup, FormControl, Checkbox } from 'react-bootstrap';
+import React from 'react'
+import * as Components from "./Components";
 import "../assets/styles/LoginPage.css";
 
-function LoginPage() {
+const LoginPage = () => {
+  const [signIn, toggle] = React.useState(true);
   return (
-    <Container className="mt-5">
-      <Row className="justify-content-center">
-        <Col md={4}>
-          <h2 className="text-center mb-4">Вхід</h2>
-          <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>E-Mail</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-            </Form.Group>
-
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Пароль</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Запам'ятати мене" />
-            </Form.Group>
-            <Button variant="primary" type="submit" className="w-100">
-              УВІЙТИ
-            </Button>
-            <div className="text-center mt-3">
-              <a href="#">Забули пароль?</a>
-            </div>
-            <hr className="mt-4" />
-            <h5 className="text-center mb-3">Вхід через соціальні мережі</h5>
-            <Button variant="outline-primary" className="w-100">
-              <i className="fab fa-facebook-f"></i>
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+    <Components.Container>
+      <Components.SignUpContainer signingIn={signIn}>
+        <Components.Form>
+          <Components.Title>Create Account</Components.Title>
+          <Components.Input type="text" placeholder="Name" />
+          <Components.Input type="email" placeholder="Email" />
+          <Components.Input type="password" placeholder="Password" />
+          <Components.Button>Sign Up</Components.Button>
+        </Components.Form>
+      </Components.SignUpContainer>
+      <Components.SignInContainer signingIn={signIn}>
+        <Components.Form>
+          <Components.Title>Sign in</Components.Title>
+          <Components.Input type="email" placeholder="Email" />
+          <Components.Input type="password" placeholder="Password" />
+          <Components.Anchor href="#">Forgot your password?</Components.Anchor>
+          <Components.Button>Sign In</Components.Button>
+        </Components.Form>
+      </Components.SignInContainer>
+      <Components.OverlayContainer signingIn={signIn}>
+        <Components.Overlay signingIn={signIn}>
+          <Components.LeftOverlayPanel signingIn={signIn}>
+            <Components.Title>Welcome Back!</Components.Title>
+            <Components.Paragraph>
+              To keep connected with us please login with your personal info
+            </Components.Paragraph>
+            <Components.GhostButton onClick={() => toggle(true)}>
+              Sign In
+            </Components.GhostButton>
+          </Components.LeftOverlayPanel>
+          <Components.RightOverlayPanel signingIn={signIn}>
+            <Components.Title>Hello, Friend!</Components.Title>
+            <Components.Paragraph>
+              Enter your personal details and start journey with us
+            </Components.Paragraph>
+            <Components.GhostButton onClick={() => toggle(false)}>
+              Sign Up
+            </Components.GhostButton>
+          </Components.RightOverlayPanel>
+        </Components.Overlay>
+      </Components.OverlayContainer>
+    </Components.Container>
   );
 }
 
-export default LoginPage;
+export default LoginPage

@@ -1,6 +1,15 @@
-import React from 'react';
-import { Form, Button, Container, Row, Col, InputGroup, FormControl, Checkbox } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React from "react";
+import {
+  Form,
+  Button,
+  Container,
+  Row,
+  Col,
+  InputGroup,
+  FormControl,
+  Checkbox,
+} from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function RegisterPage() {
   return (
@@ -30,7 +39,10 @@ function RegisterPage() {
             </Form.Group>
 
             <Form.Group controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Згода з умовами використання" />
+              <Form.Check
+                type="checkbox"
+                label="Згода з умовами використання"
+              />
             </Form.Group>
 
             <Button variant="primary" type="submit" className="w-100">
@@ -40,7 +52,9 @@ function RegisterPage() {
               <Link to="/login">Уже зареєстровані?</Link>
             </div>
             <hr className="mt-4" />
-            <h5 className="text-center mb-3">Реєстрація через соціальні мережі</h5>
+            <h5 className="text-center mb-3">
+              Реєстрація через соціальні мережі
+            </h5>
             <Button variant="outline-primary" className="w-100">
               <i className="fab fa-facebook-f"></i>
             </Button>

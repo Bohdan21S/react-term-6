@@ -1,21 +1,21 @@
 .footer {
-    background-color: #343a40;
-  }
-  
-  .footer h5 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-  }
-  
-  .footer p, .footer a {
-    color: rgba(255, 255, 255, 0.75);
-  }
-  
-  .footer a:hover {
-    color: rgba(255, 255, 255, 1);
-  }
-  
-  .footer .text-center {
-    margin-top: 2rem;
-  }
-  
+  background-color: #343a40;
+}
+
+.footer h5 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.footer p,
+.footer a {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.footer a:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.footer .text-center {
+  margin-top: 2rem;
+}
