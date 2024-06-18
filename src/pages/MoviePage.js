@@ -3,22 +3,34 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { FaPlay } from 'react-icons/fa';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import ReactPlayer from 'react-player';
 import "../assets/styles/MoviePage.css";
 
 const MoviePage = ({ film }) => {
   const [trailerVisible, setTrailerVisible] = useState(false);
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(1);
+  const [playing, setPlaying] = useState(false);
+  const [volume, setVolume] = useState(1);
   const [reviews, setReviews] = useState([
-    { id: 1, user: 'John Doe', rating: 8, comment: 'Great movie!' },
-    { id: 2, user: 'Jane Smith', rating: 7, comment: 'Enjoyed it a lot.' },
-    { id: 3, user: 'Alice Johnson', rating: 9, comment: 'Must-watch!' }
+    { id: 1, user: 'John Doe', rating: 8, comment: 'Чудовий фільм!' },
+    { id: 2, user: 'Jane Smith', rating: 7, comment: 'Доволі класне кінце впринципі можу рекомендувати' },
+    { id: 3, user: 'Alice Johnson', rating: 10, comment: 'Це буквально один із шедеврів кінематографу! Прекрасний сюжет, хороша картинка, витончена кожна деталь фільму.' }
   ]);
 
   const handleTrailerClick = () => {
     setTrailerVisible(true);
   };
 
+  // Коректно ключає трейлер фільму
+  const handleOnReady = () => {
+    setPlaying(true);
+    setVolume(0);
+    setTimeout(() => {
+      setVolume(1);
+    }, 50);
+  };
+  
   const handleReviewSubmit = (e) => {
     e.preventDefault();
     if (review.trim() === '') return; // Prevent empty reviews
@@ -45,7 +57,7 @@ const MoviePage = ({ film }) => {
   return (
     <>
       <Header />
-      <Container fluid className="p-0">
+      <Container fluid className="p-0 container-p-0">
         {!trailerVisible && (
           <div
             className="banner"
@@ -56,16 +68,18 @@ const MoviePage = ({ film }) => {
             </Button>
           </div>
         )}
-        {trailerVisible && (
-          <div className="embed-responsive embed-responsive-16by9 my-4">
-            <iframe
-              className="embed-responsive-item"
-              src={`${film.trailerUrl}?autoplay=1&mute=1`}
-              allowFullScreen
-              title="Trailer"
-              style={{ width: "100%", height: "100%" }}
-            ></iframe>
-          </div>
+        {trailerVisible && (  
+          <div className="player">
+          <ReactPlayer     
+          width='100%'
+          height='100%'    
+          volume={volume}
+          onReady={handleOnReady}
+          playing={playing}
+          url={film.trailerUrl}
+        />
+        </div> 
+          
         )}
       </Container>
       <Container className="film-info my-4">
@@ -95,17 +109,17 @@ const MoviePage = ({ film }) => {
               <p>{review.comment}</p>
               {/* Display delete button only for user's own reviews */}
               {review.user === 'Current User' && (
-                <Button variant="danger" size="sm" onClick={() => handleDeleteReview(review.id)}>
+                <a id='delete-button' onClick={() => handleDeleteReview(review.id)}>
                   Видалити відгук
-                </Button>
+                </a>
               )}
               <hr />
             </div>
           ))}
           {/* Review form */}
-          <Form onSubmit={handleReviewSubmit}>
+          <Form id='leave-review-form' onSubmit={handleReviewSubmit}>
             <Form.Group controlId="reviewTextarea">
-              <Form.Label>Ваш відгук</Form.Label>
+              <Form.Label id='label-write-review'>Написати відгук</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
@@ -113,7 +127,7 @@ const MoviePage = ({ film }) => {
                 onChange={(e) => setReview(e.target.value)}
               />
             </Form.Group>
-            <Form.Group controlId="ratingSelect">
+            <Form.Group className='rating-part' controlId="ratingSelect">
               <Form.Label>Оцінка</Form.Label>
               <div className="star-rating">
                 {[...Array(10)].map((_, i) => (
@@ -131,7 +145,7 @@ const MoviePage = ({ film }) => {
                 ))}
               </div>
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button id='' variant="primary" type="submit">
               Відправити
             </Button>
           </Form>

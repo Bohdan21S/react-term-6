@@ -8,12 +8,22 @@ import NewsPage from "./pages/NewsPage";
 
 import MoviePage from "./pages/MoviePage";
 
+import { useEffect } from "react";
 
 import img4 from './assets/images/image5.webp';
 import img6 from './assets/images/image6.png';
 
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 const moviesList = [
   {
@@ -56,7 +66,7 @@ const films = [
     id: 1,
     title: "Inception",
     banner: "https://images.squarespace-cdn.com/content/v1/5ec686197f8b2976074846c2/1618809593080-N5PB8CWYOW3OPDE2TT6E/Feature+3-1.png",
-    trailerUrl: "https://www.youtube.com/embed/YoHD9XEInc0",
+    trailerUrl: "https://www.youtube.com/embed/eY-pRQ2eMG8",
     poster: "https://i.ebayimg.com/images/g/~WwAAOSw4S1k3rB6/s-l1600.webp",
     ageLimit: "13+",
     genre: "Sci-Fi, Thriller",
@@ -139,7 +149,9 @@ const films = [
 function App() {
   return (
     <Router>
+      <ScrollToTop />
     <div className="App">
+     
       <Routes>
         <Route path="/" element={<MainPage/>} />
         <Route path="/login" element={<LoginPage/>} />
