@@ -1,81 +1,74 @@
 .movie-card {
-  position: relative;
-  max-width: none;
+  position: relative;  
   height: 100%; 
+  display: flex;
+  max-width: none;
+  flex-direction: column;
   margin: 25px;
-  width: 100%;
+  aspect-ratio: 15 / 12;
   background-color: rgb(34, 33, 54);
   color: aliceblue;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
 }
 
 .card-content {
   display: flex;
-  flex-direction: row; /* Align poster and information side by side */
-  height: 100%; /* Ensuring the content occupies full height */
+  flex-direction: row;
+  height: 100%; 
 }
 
 .movie-poster {
-  width: 50%; /* Image should take up no more than 50% of the card's width */
-  aspect-ratio: 2 / 3; /* Maintain 2:3 aspect ratio */
-  object-fit: cover; /* Ensure the image covers the area without distortion */
+  width: 50%; 
+  aspect-ratio: 15 / 24; 
+  object-fit: cover; 
 }
 
 .movie-info {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Ensure content is spaced out evenly */
+  text-align: left;
+  margin-left: 3.5%;
 }
 
-/* If two cards are shown side by side */
-@media (min-width: 767px) {
-  .movie-card {
-    flex-direction: row;
-  }
-  .movie-poster {
-    margin-right: 0; /* Remove right margin */
-  }
-  .movie-info {
-    flex-direction: column;
-  }
-  .movie-title{
-    font-size: 2rem;
-  }
-}
-
-/* If only one card is shown */
-@media (max-width: 767px) {
-  .card-content {
-    flex-direction: column;
-    align-items: center;
-  }
-  .movie-info {
-    margin-top: 20px;
-  }
-  .movie-title{
-    font-size: 1.5rem;
-  }
-}
 .show-dates {
   display: flex;
-  flex-wrap: wrap;
-  margin-top: 10px;
+  margin-top: 10%;
+  margin-right: 3%;
+  align-items: center;
+  justify-content: center;
 }
 
-.date-button {
-  margin: 5px;
+.show-dates button {
+  background-color: rgb(34, 33, 54);
+  border: 1px solid white;
+  font-size: 18px;
+  margin-right: 4%;
+  margin-bottom: 5%;
+  width: 29%;
+  padding: calc(3%);
 }
 
 .movie-title {
-  margin-bottom: 10px;
-  text-align: center; 
+  margin-top: 3%;
+  text-align: left;
 }
 
 .buttons-container {
-  margin-top: 10px;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: 15%;
+  margin-left: 0;
+  margin-right: 7%;
+}
+
+.details-button{
+  width: 100%;
+  aspect-ratio: 7/1;
+}
+
+.movie-details {
+  margin-top: 10%; 
+  margin-right: 3%;
 }
 
 .likes-badge {

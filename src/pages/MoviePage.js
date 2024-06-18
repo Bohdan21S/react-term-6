@@ -60,7 +60,7 @@ const MoviePage = ({ film }) => {
           <div className="embed-responsive embed-responsive-16by9 my-4">
             <iframe
               className="embed-responsive-item"
-              src={film.trailerUrl}
+              src={`${film.trailerUrl}?autoplay=1&mute=1`}
               allowFullScreen
               title="Trailer"
               style={{ width: "100%", height: "100%" }}
