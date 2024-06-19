@@ -18,6 +18,20 @@ const SeatSelection = () => {
     }
   };
 
+  const handlePurchase = () => {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    if (loggedInUser) {
+      const updatedTicketInfo = {
+        ticketInfo,
+        selectedSeats: selectedSeats
+      };
+      localStorage.setItem(`${JSON.parse(loggedInUser).id}`, JSON.stringify(updatedTicketInfo));
+    } else {
+      alert("Для покупки квитків увійдіть в акаунт");
+      window.location.href = "/login";
+    }
+  };
+
   return (
     <div className="seat-selection-page">
       <Header />
@@ -47,7 +61,9 @@ const SeatSelection = () => {
           </div>
         </div>
       </div>
-      <button className="purchase-button">Купити</button>
+      <button className="purchase-button" onClick={handlePurchase}>
+        Купити
+      </button>
     </div>
   );
 };

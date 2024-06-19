@@ -35,7 +35,7 @@ const MainPage = () => {
       },
       {
         id: 2,
-        title: "Фільм 1",
+        title: "Фільм 15",
         duration: 120,
         director: "Режисер 1",
         actors: ["Актор 1", "Актор 2"],
@@ -68,7 +68,7 @@ const MainPage = () => {
         <Row>
           {movies.map((movie) => (
             <Col md={6} key={movie.id}>
-              <MovieCard movie={movie} showDates={movie.showDates} />
+              <MovieCard movie={movie} />
             </Col>
           ))}
         </Row>

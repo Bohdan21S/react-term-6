@@ -6,7 +6,7 @@ export const SeatSelectionContext = createContext();
 
 export const SeatSelectionProvider = ({ children, moviesList }) => {
   const [selectedSeats, setSelectedSeats] = useState(() => {
-    const savedSeats = localStorage.getItem("selectedSeats");
+    const savedSeats = sessionStorage.getItem("selectedSeats");
     return savedSeats ? JSON.parse(savedSeats) : [];
   });
 
@@ -27,8 +27,20 @@ export const SeatSelectionProvider = ({ children, moviesList }) => {
   ticketInfo.date=date;
 
   useEffect(() => {
-    localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
+    sessionStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
   }, [selectedSeats]);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      sessionStorage.removeItem("selectedSeats");
+    };
+  
+    window.addEventListener("beforeunload", handleBeforeUnload);
+  
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <SeatSelectionContext.Provider

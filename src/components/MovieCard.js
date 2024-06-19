@@ -3,8 +3,7 @@ import { Card, Button, Badge } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/styles/MovieCard.css";
 
-const MovieCard = ({ movie, showDates }) => {
-  // штука яка крч шрифт міняє в залежності від ширини карточки
+const MovieCard = ({ movie }) => {
   const movieCardRef = useRef(null);
   const movieTitleRef = useRef(null);
   const movieTextRef = useRef(null);
@@ -30,6 +29,8 @@ const MovieCard = ({ movie, showDates }) => {
     window.addEventListener("resize", adjustFontSize);
     return () => window.removeEventListener("resize", adjustFontSize);
   }, []);
+
+  const showDates = movie.showDates;
 
   const handleTicketBuy = (ticketId) => {
     navigate(`/ticket/${movie.id}/${ticketId + 1}`);

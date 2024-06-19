@@ -34,7 +34,7 @@ const MoviePage = ({ film }) => {
     setTrailerVisible(true);
   };
 
-  // Коректно ключає трейлер фільму
+  // Коректно включає трейлер фільму
   const handleOnReady = () => {
     setPlaying(true);
     setVolume(0);
@@ -49,7 +49,7 @@ const MoviePage = ({ film }) => {
 
     const newReview = {
       id: Date.now(), // Unique identifier (can be timestamp)
-      user: "Current User", // Replace with actual user info
+      user: "Guest", // TODO Replace with actual user info
       rating,
       comment: review,
     };

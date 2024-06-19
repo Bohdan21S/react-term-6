@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import * as Components from "../components/LoginPageComponents";
 import "../assets/styles/LoginPage.css";
 import {useState} from 'react';
 import { useLocation, useNavigate} from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 const LoginPage = () => {
 
@@ -23,19 +24,20 @@ const LoginPage = () => {
           navigate('/');
       }
   };
-    const handleRegister = () => {
-        const userData = {name, email, password};
-        const users = JSON.parse(localStorage.getItem('users')) || [];
-        users.push(userData);
-        localStorage.setItem('users', JSON.stringify(users));
-        const user = users.find(user => user.email === email && user.password === password);
-        localStorage.setItem('loggedInUser', JSON.stringify(user));
-        handleBackNavigation();
-    };
+
+  const handleRegister = () => {
+    const userData = {id: uuidv4(), name, email, password};
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    users.push(userData);
+    localStorage.setItem('users', JSON.stringify(users));
+    const user = users.find(user => user.email === email && user.password === password);
+    localStorage.setItem('loggedInUser', JSON.stringify(user));
+    handleBackNavigation();
+};
 
     const handleLogin = () => {
         const users = JSON.parse(localStorage.getItem('users')) || [];
-        const user = users.find(user => user.name && user.email === email && user.password === password);
+        const user = users.find(user => user.email === email && user.password === password);
         if (user) {
             localStorage.setItem('loggedInUser', JSON.stringify(user));
             handleBackNavigation();
