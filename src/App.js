@@ -4,20 +4,14 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import NewsPage from "./pages/NewsPage";
-
 import MoviePage from "./pages/MoviePage";
 
 import { useEffect } from "react";
-
-import img4 from "./assets/images/image5.webp";
-import img6 from "./assets/images/ticket-image.png";
-
 import { useParams, useLocation } from "react-router-dom";
 
 import { SeatSelectionProvider } from "./pages/SeatSelectionContext";
 import SeatSelection from "./pages/SeatSelection";
-
-import { UserProvider } from './components/UserContext';
+import { UserProvider } from "./components/UserContext";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -29,49 +23,9 @@ function ScrollToTop() {
   return null;
 }
 
-const moviesList = [
-  {
-    id: 1,
-    title: "Фуріоза: Шалений Макс. Сага",
-    duration: 148,
-    director: "Джордж Міллер",
-    actors: [
-      "Аня Тейлор-Джой",
-      "Кріс Гемстворт",
-      "Аліла Браун",
-      "Том Берк",
-      "та інші.",
-    ],
-    description:
-      "Коли світ занепав, юну Фуріозу викрадають із Зеленого Місця Багатьох Матерів та віддають до рук великої Байкерської Орди на чолі з Дементусом. Пробираючись разом Пусткою, вони натрапляють на Цитадель Несмертела Джо. Поки два тирани воюють за панування, на Фуріозу чекає багато випробувань у спробі віднайти шлях додому.",
-    poster: img4,
-    likes: 21,
-    showDates: ["09:30", "12:45", "24:21"],
-  },
-  {
-    id: 2,
-    title: "Фільм 1",
-    duration: 120,
-    director: "Режисер 1",
-    actors: ["Актор 1", "Актор 2"],
-    description: "Короткий опис фільму 1",
-    poster: img6,
-    likes: 21,
-    showDates: ["09:30", "12:45", "24:21"],
-  },
-  {
-    id: 3,
-    title: "Фільм 1",
-    duration: 120,
-    director: "Режисер 1",
-    actors: ["Актор 1", "Актор 2"],
-    description: "Короткий опис фільму 1",
-    poster: img6,
-    likes: 21,
-    showDates: ["09:30", "12:45", "24:21"],
-  },
-];
-
+{
+  /** MoviePage info */
+}
 const films = [
   {
     id: 1,
@@ -90,106 +44,103 @@ const films = [
     ratings: "8.8",
     description:
       "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O. Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction, stealing valuable secrets from deep within the subconscious during the dream state, when the mind is at its most vulnerable. Cobb's rare ability has made him a coveted player in this treacherous new world of corporate espionage, but it has also made him an international fugitive and cost him everything he has ever loved. Now Cobb is being offered a chance at redemption. One last job could give him his life back but only if he can accomplish the impossible, inception. Instead of the perfect heist, Cobb and his team of specialists have to pull off the reverse: their task is not to steal an idea, but to plant one.",
-    showDates: ["09:30", "12:45", "24:21"],
+    showDates: ["09:30", "12:00", "21:21"],
   },
   {
     id: 2,
-    title: "The Dark Knight",
+    title: "Фуріоза: Шалений Макс. Сага",
     banner:
-      "https://static1.colliderimages.com/wordpress/wp-content/uploads/the-avengers-movie-poster-banners-slice-03.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5",
-    trailerUrl: "https://www.youtube.com/embed/EXeTwQWrcwY",
-    poster: "https://image.url/dark-knight-poster.jpg",
-    ageLimit: "13+",
-    genre: "Action, Crime, Drama",
-    duration: "152 min",
-    year: "2008",
-    country: "USA",
-    director: "Christopher Nolan",
-    actors: ["Christian Bale", "Heath Ledger", "Aaron Eckhart"],
-    ratings: "9.0",
+      "https://multiplex.ua/images/94/15/9415d2c5f580aab7c31ddf780e6ad106.jpeg",
+    trailerUrl: "https://www.youtube.com/embed/wJz4e2aBsHg",
+    poster: "https://womo.ua/wp-content/uploads/2024/03/furiosa-poster_1.jpg",
+    ageLimit: "18+",
+    genre: "Екшн, Бойовик, Пригодницький",
+    duration: "148 хв",
+    year: "2024",
+    country: "Австралія, США",
+    director: "Джордж Міллер",
+    actors: [
+      "Аня Тейлор-Джой",
+      "Кріс Гемстворт",
+      "Аліла Браун",
+      "Том Берк",
+      "та інші.",
+    ],
+    ratings: "7.8",
     description:
-      "When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham.",
-      showDates: ["09:30", "12:45", "24:21"]
+      "Фуріоза (Аня Тейлор-Джой) була зовсім юною, коли звичний світ почав руйнуватись та зникати. Дівчинку викрали з її дому, Зеленого Місця Багатьох Матерів. Орда Байкерів начолі з Дементусом (Кріс Гемстворт) тепер вважає Фуріозу своєю власністю. Поки тривають криваві війни між Дементусом та Несмертним Джо, дівчина намагається вижити. Віднині головна мета її життя – повернутися додому.",
+      showDates: ["10:00", "15:30", "20:00"],
   },
   {
     id: 3,
-    title: "Interstellar",
+    title: "Уявні друзі",
     banner:
-      "https://static1.colliderimages.com/wordpress/wp-content/uploads/the-avengers-movie-poster-banners-slice-03.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5",
-    trailerUrl: "https://www.youtube.com/embed/zSWdZVtXT7E",
-    poster: "https://image.url/interstellar-poster.jpg",
-    ageLimit: "13+",
-    genre: "Adventure, Drama, Sci-Fi",
-    duration: "169 min",
-    year: "2014",
-    country: "USA",
-    director: "Christopher Nolan",
-    actors: ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"],
-    ratings: "8.6",
+      "https://bhfilms.com.ua/wp-content/uploads/if_facebook.jpg",
+    trailerUrl: "https://www.youtube.com/embed/9Q6ioSgfOxQ",
+    poster: "https://kino-teatr.ua/public/main/films/2024-04/poster_660d19f095ac8.jpg",
+    ageLimit: "0+",
+    genre: "Кінокомедія, Пригодницький, Фентезі, Мюзикл",
+    duration: "104 хв",
+    year: "2024",
+    country: "США",
+    director: "Джон Кразінські",
+    actors: ["Раян Рейнольдс",
+      "Джон Кразінські",
+      "Блейк Лайвлі",
+      "Бред Пітт",
+      "та інші."],
+    ratings: "6.7",
     description:
-      "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
-  },
+      "Дівчинка на ім’я Бі (Кейлі Флемінг) раптом починає бачити уявних друзів. Звісно, деякі діти фантазують про таку компанію. Однак Бі нічого не вигадувала. Дівчинка бачить безліч дивних персонажів, яких вигадав хтось інший. Виявляється, що такою самою силою наділений і її сусід (Раян Рейнольдс). Тепер вони удвох даватимуть раду чималій когорті чудернацьких створінь. Справа в тім, що діти, які вигадали цих персонажів, давно виросли та забули про своїх кращих друзів. Було б добре їм знову зустрітися.",
+    showDates: ["12:45", "17:00", "18:30"],
+    },
   {
     id: 4,
-    title: "The Matrix",
+    title: "Будинок Слово. Нескінчений роман",
     banner:
-      "https://static1.colliderimages.com/wordpress/wp-content/uploads/the-avengers-movie-poster-banners-slice-03.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5",
-    trailerUrl: "https://www.youtube.com/embed/vKQi3bBA1y8",
-    poster: "https://image.url/matrix-poster.jpg",
+      "https://cdn.drukarnia.com.ua/65afee792e16847e21f7013d/images/articles/66674bbdfe538e0bbb5f90f6/hsHKgWHaAh_ptqwr8s3.jpeg",
+    trailerUrl: "https://www.youtube.com/embed/MxR257eHEFE",
+    poster: "https://lyuk.media/wp-content/uploads/2022/07/photo5325644200638790697.jpg",
     ageLimit: "16+",
-    genre: "Action, Sci-Fi",
-    duration: "136 min",
-    year: "1999",
-    country: "USA",
-    director: "Lana Wachowski, Lilly Wachowski",
-    actors: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
-    ratings: "8.7",
+    genre: "Історична драма, Детектив",
+    duration: "120 хв",
+    year: "2024",
+    country: "Україна",
+    director: "Тарас Томенко",
+    actors: ["Довженко В'ячеслав Валерійович",
+      "Попенко Геннадій Миколайович",
+      "Ніна Набока",
+      "та інші."],
+    ratings: "8.4",
     description:
-      "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
-  },
-  {
-    id: 5,
-    title: "The Shawshank Redemption",
-    banner:
-      "https://static1.colliderimages.com/wordpress/wp-content/uploads/the-avengers-movie-poster-banners-slice-03.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5",
-    trailerUrl: "https://www.youtube.com/embed/6hB3S9bIaco",
-    poster: "https://image.url/shawshank-poster.jpg",
-    ageLimit: "16+",
-    genre: "Drama",
-    duration: "142 min",
-    year: "1994",
-    country: "USA",
-    director: "Frank Darabont",
-    actors: ["Tim Robbins", "Morgan Freeman", "Bob Gunton"],
-    ratings: "9.3",
-    description:
-      "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
-  },
+      "1927 року у Харкові за наказом Сталіна збудовано особливий будинок. Тут оселилися кращі українські митці — поети, письменники, художники та режисери. Сама лише можливість жити тут вже була для тогочасних творців визнанням. Якось у будинку з'являється новенький. Він працює коректором преси та понад усе мріє влитися в когорту провідних письменників. Аби оселитися тут йому дійсно знадобився талант — талант підслуховувати та переповідати все почуте агенту НКВС.",
+    showDates: ["10:00", "15:30", "22:00"],
+    }
 ];
 
 function App() {
   return (
     <UserProvider>
-    <Router>
-      <ScrollToTop />
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<LoginPage />} />
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="/movies/:id" element={<MoviePageWrapper />} />
-          <Route
-            path="/ticket/:movieId/:timeId"
-            element={
-              <SeatSelectionProvider moviesList={moviesList}>
-                <SeatSelection />
-              </SeatSelectionProvider>
-            }
-          />
-        </Routes>
-      </div>
-    </Router>
+      <Router>
+        <ScrollToTop />
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<LoginPage />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/movies/:id" element={<MoviePageWrapper />} />
+            <Route
+              path="/ticket/:movieId/:timeId"
+              element={
+                <SeatSelectionProvider moviesList={films}>
+                  <SeatSelection />
+                </SeatSelectionProvider>
+              }
+            />
+          </Routes>
+        </div>
+      </Router>
     </UserProvider>
   );
 }

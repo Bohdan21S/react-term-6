@@ -8,6 +8,7 @@ const Header = () => {
   const { user, logout } = useContext(UserContext);
   const location = useLocation();
 
+  {/** Remembering path from we get to login page */}
   const handleLinkClick = () => {
     sessionStorage.setItem('previousPath', location.pathname);
   };

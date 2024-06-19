@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { FaPlay } from "react-icons/fa";
 import Header from "../components/Header";
@@ -30,6 +30,26 @@ const MoviePage = ({ film }) => {
     },
   ]);
 
+  const loggedInUser = localStorage.getItem('loggedInUser');
+  const userId = loggedInUser ? JSON.parse(loggedInUser).id : null;
+  const userName = loggedInUser ?  JSON.parse(loggedInUser).name : 'Guest';
+  const movieId = film.id;
+
+  //додає з локалстореджа в reviews всі відгуки до цього фільму
+  useEffect(() => {
+    const existingReviews = localStorage.getItem('reviews');
+    if (existingReviews) {
+      const reviewsObject = JSON.parse(existingReviews);
+      let allReviews = [];
+      for (let user in reviewsObject) {
+        if (reviewsObject[user][movieId]) {
+          allReviews = [...allReviews, ...reviewsObject[user][movieId]];
+        }
+      }
+      setReviews(prevReviews => [...allReviews, ...prevReviews]);
+    }
+  }, [movieId]);
+
   const handleTrailerClick = () => {
     setTrailerVisible(true);
   };
@@ -49,16 +69,31 @@ const MoviePage = ({ film }) => {
 
     const newReview = {
       id: Date.now(), // Unique identifier (can be timestamp)
-      user: "Guest", // TODO Replace with actual user info
+      user: userName,
       rating,
       comment: review,
     };
 
-    // Add new review to the beginning of the reviews list
-    setReviews([newReview, ...reviews]);
-    setReview("");
-    setRating(1);
-  };
+    setReviews(prevReviews => [newReview, ...prevReviews]);
+
+    let reviewsObject = {};
+  const existingReviews = localStorage.getItem('reviews');
+  if (existingReviews) {
+    reviewsObject = JSON.parse(existingReviews);
+  }
+
+  if (!reviewsObject[userId]) {
+    reviewsObject[userId] = {};
+  }
+
+  if (!reviewsObject[userId][movieId]) {
+    reviewsObject[userId][movieId] = [];
+  }
+
+  reviewsObject[userId][movieId].push(newReview);
+
+  localStorage.setItem('reviews', JSON.stringify(reviewsObject));
+};
 
   const handleDeleteReview = (reviewId) => {
     // Filter out the review to delete based on its id
@@ -157,7 +192,7 @@ const MoviePage = ({ film }) => {
               </p>
               <p>{review.comment}</p>
               {/* Display delete button only for user's own reviews */}
-              {review.user === "Current User" && (
+              {review.user === "Guest" && (
                 <a
                   id="delete-button"
                   onClick={() => handleDeleteReview(review.id)}

@@ -1,3 +1,4 @@
+/** {user} to check whether the user logged in */
 import React, { createContext, useState, useEffect } from 'react';
 
 const UserContext = createContext();

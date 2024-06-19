@@ -1,7 +1,7 @@
 // src/components/SeatSelection.js
 import React, { useContext } from "react";
 import { SeatSelectionContext } from "./SeatSelectionContext";
-import "./SeatSelection.css";
+import "../assets/styles/SeatSelection.css";
 import Header from "../components/Header";
 
 const SeatSelection = () => {
@@ -25,7 +25,14 @@ const SeatSelection = () => {
         ticketInfo,
         selectedSeats: selectedSeats
       };
-      localStorage.setItem(`${JSON.parse(loggedInUser).id}`, JSON.stringify(updatedTicketInfo));
+      const allTicketsInfo = JSON.parse(localStorage.getItem('ticketsInfo')) || {};
+      const userId = JSON.parse(loggedInUser).id;
+      if (!allTicketsInfo[userId]) {
+        allTicketsInfo[userId] = [];
+      }
+      allTicketsInfo[userId].push(updatedTicketInfo);
+      localStorage.setItem('ticketsInfo', JSON.stringify(allTicketsInfo));
+      sessionStorage.removeItem("selectedSeats");
     } else {
       alert("Для покупки квитків увійдіть в акаунт");
       window.location.href = "/login";
