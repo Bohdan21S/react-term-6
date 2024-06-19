@@ -2,6 +2,7 @@
 import React, { useContext } from 'react';
 import { SeatSelectionContext } from './SeatSelectionContext';
 import './SeatSelection.css';
+import Header from '../components/Header';
 
 const SeatSelection = () => {
   const { selectedSeats, setSelectedSeats, ticketInfo } = useContext(SeatSelectionContext);
@@ -18,12 +19,13 @@ const SeatSelection = () => {
 
   return (
     <div className="seat-selection-page">
-      <header className="header">Кінотеатр</header>
+      <Header/>
       <div className="content">
         <div className="ticket-info">
-          <h2>{ticketInfo.movieTitle}</h2>
+          <p>{ticketInfo.movieTitle}</p>
           <p>Зал: {ticketInfo.hallName}</p>
-          <p>Дата та час: {ticketInfo.dateTime}</p>
+          <p>Дата: {ticketInfo.date}</p>
+          <p>Початок: {ticketInfo.time}</p>
           <p>Місця: {selectedSeats.join(', ')}</p>
           <p>Сума: {selectedSeats.length * ticketInfo.price} грн</p>
         </div>

@@ -78,7 +78,6 @@ h1 {
   font-size: 2rem;
 }
 
-
 #delete-button {
   color: #704242;
   cursor: pointer;
@@ -109,6 +108,18 @@ h1 {
 
 #submit-button {
   width: 50%;
+  align-self: center;
+  background-color: rgba(81, 78, 131, 0.7);
+  border: none;
+}
+
+#submit-button:hover{
+  background-color: rgba(81, 78, 131, 0.9);
+}
+
+#submit-button:active{
+  transform: scale(0.95);
+  --bs-btn-active-bg: rgba(81, 78, 131, 0.9);
 }
 
 .review-section form .star-rating input {
@@ -142,4 +153,34 @@ h1 {
 .review-section form .star-rating label:hover,
 .review-section form .star-rating label:hover~label {
   color: #FFED85;
+}
+
+.show-dates-for-movie {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.show-dates-for-movie button {
+  background-color: rgba(15, 13, 53, 0.4);
+  border: 1px solid white;
+  font-size: 18px;
+  margin-right: 2%;
+  margin-left: 2%;
+  margin-bottom: 5%;
+  width: 20%;
+  max-width: 125px;
+  padding: calc(1.5%);
+}
+
+.show-dates-for-movie button:hover{
+  background-color: rgba(15, 13, 53, 0.6);
+  border: 1px solid white;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.show-dates-for-movie button:active {
+  transform: scale(0.95);
+  --bs-btn-active-bg: rgba(15, 13, 53, 0.6);
+  --bs-btn-active-border-color: white;
 }

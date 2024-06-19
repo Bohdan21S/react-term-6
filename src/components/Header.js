@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" id="h">
       <Container>
-        <Navbar.Brand as={Link} to="/home">
+        <Navbar.Brand as={Link} to="/">
           Кінотеатр "UniFilms"
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

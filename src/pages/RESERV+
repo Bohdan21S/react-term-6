@@ -1,0 +1,185 @@
+// src/App.js
+import React, { useState } from 'react';
+import { SeatSelectionProvider } from './SeatSelectionContext';
+import SeatSelection from './components/SeatSelection';
+import OtherComponent from './components/OtherComponent'; // Приклад іншої сторінки
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+
+const App = () => {
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [ticketInfo, setTicketInfo] = useState({
+    movieTitle: 'Назва фільму',
+    hallName: 'Зал 1',
+    dateTime: '2023-12-25 18:00',
+    price: 100,
+  });
+
+  return (
+    <Router>
+      <SeatSelectionProvider value={{ selectedSeats, setSelectedSeats, ticketInfo, setTicketInfo }}>
+        <nav>
+          <Link to="/">Вибір місць</Link>
+          <Link to="/other">Інша сторінка</Link>
+        </nav>
+        <Switch>
+          <Route exact path="/">
+            <SeatSelection />
+          </Route>
+          <Route path="/other">
+            <OtherComponent />
+          </Route>
+        </Switch>
+      </SeatSelectionProvider>
+    </Router>
+  );
+};
+
+export default App;
+
+
+// src/SeatSelectionContext.js
+import React, { createContext } from 'react';
+
+export const SeatSelectionContext = createContext();
+
+export const SeatSelectionProvider = ({ children, value }) => {
+  return (
+    <SeatSelectionContext.Provider value={value}>
+      {children}
+    </SeatSelectionContext.Provider>
+  );
+};
+
+
+// src/components/SeatSelection.js
+import React, { useContext } from 'react';
+import { SeatSelectionContext } from '../SeatSelectionContext';
+import './SeatSelection.css';
+
+const SeatSelection = () => {
+  const { selectedSeats, setSelectedSeats, ticketInfo } = useContext(SeatSelectionContext);
+  const totalSeats = 10 * 10; // 10 на 10 місць
+  const seats = Array.from({ length: totalSeats }, (_, i) => i + 1);
+
+  const handleSeatClick = (seat) => {
+    if (selectedSeats.includes(seat)) {
+      setSelectedSeats(selectedSeats.filter(s => s !== seat));
+    } else {
+      setSelectedSeats([...selectedSeats, seat]);
+    }
+  };
+
+  return (
+    <div className="seat-selection-page">
+      <header className="header">Кінотеатр</header>
+      <div className="content">
+        <div className="ticket-info">
+          <h2>{ticketInfo.movieTitle}</h2>
+          <p>Зал: {ticketInfo.hallName}</p>
+          <p>Дата та час: {ticketInfo.dateTime}</p>
+          <p>Місця: {selectedSeats.join(', ')}</p>
+          <p>Сума: {selectedSeats.length * ticketInfo.price} грн</p>
+        </div>
+        <div className="seat-map-container">
+          <div className="screen">Екран</div>
+          <div className="seat-map">
+            {seats.map(seat => (
+              <div
+                key={seat}
+                className={`seat ${selectedSeats.includes(seat) ? 'selected' : ''}`}
+                onClick={() => handleSeatClick(seat)}
+              >
+                {seat}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <button className="purchase-button">Купити</button>
+    </div>
+  );
+};
+
+export default SeatSelection;
+
+
+/* src/components/SeatSelection.css */
+.header {
+    font-size: 24px;
+    padding: 20px;
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .ticket-info {
+    width: 30%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .seat-map-container {
+    width: 60%;
+  }
+  
+  .screen {
+    width: 100%;
+    height: 30px;
+    background-color: #ccc;
+    text-align: center;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
+  
+  .seat-map {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 10px;
+  }
+  
+  .seat {
+    width: 40px;
+    height: 40px;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .seat:hover {
+    background-color: #bbb;
+  }
+  
+  .seat.selected {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  
+  .purchase-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #ff9800;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+  }
+  
+  .purchase-button:hover {
+    background-color: #e68900;
+  }
+
+  
+  

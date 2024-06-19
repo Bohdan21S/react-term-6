@@ -54,6 +54,12 @@
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
+.show-dates button:active {
+  transform: scale(0.95);
+  --bs-btn-active-bg: rgba(15, 13, 53, 0.6);
+  --bs-btn-active-border-color: white;
+}
+
 .movie-title {
   margin-top: 3%;
   text-align: left;
@@ -78,6 +84,11 @@
   background-color: rgba(81, 78, 131, 0.9);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 
+}
+
+.details-button:active {
+  transform: scale(0.95);
+  --bs-btn-active-bg: rgba(81, 78, 131, 0.9);
 }
 
 .movie-details {

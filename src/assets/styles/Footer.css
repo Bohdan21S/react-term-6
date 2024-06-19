@@ -17,5 +17,9 @@
 }
 
 .footer .text-center {
-  margin-top: 2rem;
+  margin-top: 1rem;
+}
+
+.row {
+  margin-top: 1%;
 }

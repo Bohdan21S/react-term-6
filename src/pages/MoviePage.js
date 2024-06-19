@@ -103,6 +103,15 @@ const MoviePage = ({ film }) => {
             <img src={film.poster} alt={`${film.title} poster`} />
           </Col>
           <Col md={8}>
+          {film.showDates && (
+            <div className="show-dates-for-movie">
+              {film.showDates.map((date, index) => (
+                <Button key={index} variant="primary" className="date-button">
+                  {date}
+                </Button>
+              ))}
+            </div>
+          )}
             <p>
               <strong>Вікове обмеження:</strong> {film.ageLimit}
             </p>

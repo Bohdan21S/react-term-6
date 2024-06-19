@@ -10,9 +10,10 @@ export const SeatSelectionProvider = ({ children }) => {
   });
 
   const [ticketInfo, setTicketInfo] = useState({
-    movieTitle: 'Назва фільму',
-    hallName: 'Зал 1',
-    dateTime: '2023-12-25 18:00',
+    movieTitle: 'Inception',
+    hallName: 'Зал №3',
+    date: '2023-12-25',
+    time: '18:00',
     price: 100,
   });
 
