@@ -1,9 +1,17 @@
-import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import "../assets/styles/Header.css";
+import React, { useContext } from 'react';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Link, useLocation } from 'react-router-dom';
+import { UserContext } from './UserContext';
+import '../assets/styles/Header.css';
 
 const Header = () => {
+  const { user, logout } = useContext(UserContext);
+  const location = useLocation();
+
+  const handleLinkClick = () => {
+    sessionStorage.setItem('previousPath', location.pathname);
+  };
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg" id="h">
       <Container>
@@ -30,12 +38,25 @@ const Header = () => {
             </Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link as={Link} to="/login">
-              Увійти
-            </Nav.Link>
-            <Nav.Link as={Link} to="/signup">
-              Зареєструватися
-            </Nav.Link>
+            {user ? (
+              <>
+                <Nav.Link as={Link} to="/profile">
+                  Мій кабінет
+                </Nav.Link>
+                <Nav.Link onClick={logout}>
+                  Вийти
+                </Nav.Link>
+              </>
+            ) : (
+              <>
+                <Nav.Link as={Link} to={{ pathname: '/login'}} onClick={handleLinkClick}>
+                  Увійти
+                </Nav.Link>
+                <Nav.Link as={Link} to={{ pathname: '/signup'}} onClick={handleLinkClick}>
+                  Зареєструватися
+                </Nav.Link>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

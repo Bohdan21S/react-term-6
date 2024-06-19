@@ -14,7 +14,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("https://cdn.vysokeskoly.cz/czech-universities/uploads/2020/06/64710-kopie.jpg");
+    background-image: url("../images/login-background.jpg");
     background-size: cover;
     background-position: center;
     filter: blur(4px);

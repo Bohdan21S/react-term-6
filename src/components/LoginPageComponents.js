@@ -15,6 +15,17 @@ export const Container = styled.div`
   }
 `;
 
+export const CloseIcon = styled.svg`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  opacity: 0.75;
+  cursor: pointer;
+  z-index: 999;
+`;
+
 export const SignUpContainer = styled.div`
   position: absolute;
   top: 0;

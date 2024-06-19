@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ReactPlayer from "react-player";
 import "../assets/styles/MoviePage.css";
+import { useNavigate } from "react-router-dom";
 
 const MoviePage = ({ film }) => {
   const [trailerVisible, setTrailerVisible] = useState(false);
@@ -65,6 +66,11 @@ const MoviePage = ({ film }) => {
     setReviews(updatedReviews);
   };
 
+  const navigate = useNavigate();
+  const handleTicketBuy = (ticketId) => {
+    navigate(`/ticket/${film.id}/${ticketId + 1}`);
+  };
+
   return (
     <>
       <Header />
@@ -106,7 +112,7 @@ const MoviePage = ({ film }) => {
           {film.showDates && (
             <div className="show-dates-for-movie">
               {film.showDates.map((date, index) => (
-                <Button key={index} variant="primary" className="date-button">
+                <Button onClick={() => handleTicketBuy(index)} key={index} variant="primary" className="date-button">
                   {date}
                 </Button>
               ))}

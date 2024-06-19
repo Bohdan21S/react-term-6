@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Card, Button, Badge } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../assets/styles/MovieCard.css";
-import img3 from "../assets/images/image3.jpg";
 
 const MovieCard = ({ movie, showDates }) => {
   // штука яка крч шрифт міняє в залежності від ширини карточки
@@ -10,6 +9,7 @@ const MovieCard = ({ movie, showDates }) => {
   const movieTitleRef = useRef(null);
   const movieTextRef = useRef(null);
   const movieDetailsRef = useRef(null);
+  const navigate = useNavigate();
   useEffect(() => {
     function adjustFontSize() {
       if (
@@ -31,6 +31,10 @@ const MovieCard = ({ movie, showDates }) => {
     return () => window.removeEventListener("resize", adjustFontSize);
   }, []);
 
+  const handleTicketBuy = (ticketId) => {
+    navigate(`/ticket/${movie.id}/${ticketId + 1}`);
+  } 
+
   return (
     <Card className="movie-card" ref={movieCardRef}>
       <div className="card-content">
@@ -42,7 +46,7 @@ const MovieCard = ({ movie, showDates }) => {
           {showDates && (
             <div className="show-dates">
               {showDates.map((date, index) => (
-                <Button key={index} variant="primary" className="date-button">
+                <Button onClick={() => handleTicketBuy(index)} key={index} variant="primary" className="date-button">
                   {date}
                 </Button>
               ))}

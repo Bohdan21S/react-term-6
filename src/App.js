@@ -3,7 +3,6 @@ import "./assets/styles/App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
 import NewsPage from "./pages/NewsPage";
 
 import MoviePage from "./pages/MoviePage";
@@ -11,13 +10,14 @@ import MoviePage from "./pages/MoviePage";
 import { useEffect } from "react";
 
 import img4 from "./assets/images/image5.webp";
-import img6 from "./assets/images/image6.png";
+import img6 from "./assets/images/ticket-image.png";
 
 import { useParams, useLocation } from "react-router-dom";
 
+import { SeatSelectionProvider } from "./pages/SeatSelectionContext";
+import SeatSelection from "./pages/SeatSelection";
 
-import { SeatSelectionProvider } from './pages/SeatSelectionContext';
-import SeatSelection from './pages/SeatSelection';
+import { UserProvider } from './components/UserContext';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -66,7 +66,7 @@ const moviesList = [
     director: "Режисер 1",
     actors: ["Актор 1", "Актор 2"],
     description: "Короткий опис фільму 1",
-    poster: img4,
+    poster: img6,
     likes: 21,
     showDates: ["09:30", "12:45", "24:21"],
   },
@@ -91,7 +91,7 @@ const films = [
     description:
       "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O. Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction, stealing valuable secrets from deep within the subconscious during the dream state, when the mind is at its most vulnerable. Cobb's rare ability has made him a coveted player in this treacherous new world of corporate espionage, but it has also made him an international fugitive and cost him everything he has ever loved. Now Cobb is being offered a chance at redemption. One last job could give him his life back but only if he can accomplish the impossible, inception. Instead of the perfect heist, Cobb and his team of specialists have to pull off the reverse: their task is not to steal an idea, but to plant one.",
     showDates: ["09:30", "12:45", "24:21"],
-    },
+  },
   {
     id: 2,
     title: "The Dark Knight",
@@ -109,6 +109,7 @@ const films = [
     ratings: "9.0",
     description:
       "When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham.",
+      showDates: ["09:30", "12:45", "24:21"]
   },
   {
     id: 3,
@@ -168,32 +169,28 @@ const films = [
 
 function App() {
   return (
+    <UserProvider>
     <Router>
       <ScrollToTop />
       <div className="App">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginPage action='login'/>} />
-          <Route path="/signup" element={<LoginPage action='signup'/>} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<LoginPage />} />
           <Route path="/news" element={<NewsPage />} />
-
-          {/* <Route path="/movies/:id" element={<MoviePage moviesData={moviesList}/>} /> */}
-          {/* <Route path="/movies/:id" render={({ match }) => {
-          const film = films[match.params.id];
-          return <MoviePage film={film} />;
-        }} /> */}
-
           <Route path="/movies/:id" element={<MoviePageWrapper />} />
-
-          <Route path="/ticket" element={<SeatSelectionProvider>
-      <SeatSelection />
-    </SeatSelectionProvider>} />
-
-          {/* const { id } = useParams();
-        const film = moviesData && moviesData.find(movie => movie.id === parseInt(id)); */}
+          <Route
+            path="/ticket/:movieId/:timeId"
+            element={
+              <SeatSelectionProvider moviesList={moviesList}>
+                <SeatSelection />
+              </SeatSelectionProvider>
+            }
+          />
         </Routes>
       </div>
     </Router>
+    </UserProvider>
   );
 }
 

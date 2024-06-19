@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import KaruselkaNahui from "../components/KaruselkaNahui";
+import Karuselka from "../components/Karuselka";
 
 import img4 from "../assets/images/image5.webp";
 import img6 from "../assets/images/image6.png";
@@ -62,7 +62,7 @@ const MainPage = () => {
     <>
       <Header />
 
-      <KaruselkaNahui />
+      <Karuselka />
 
       <div id="containsRow">
         <Row>
