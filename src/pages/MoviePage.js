@@ -14,12 +14,13 @@ const MoviePage = ({ film }) => {
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
   const [reviews, setReviews] = useState([
-    { id: 1, user: "John Doe", rating: 8, comment: "Чудовий фільм!" },
+    { id: 1, user: "John Doe", rating: 8, comment: "Чудовий фільм!", userID: "",},
     {
       id: 2,
       user: "Jane Smith",
       rating: 7,
       comment: "Доволі класне кінце впринципі можу рекомендувати",
+      userID: "",
     },
     {
       id: 3,
@@ -27,6 +28,7 @@ const MoviePage = ({ film }) => {
       rating: 10,
       comment:
         "Це буквально один із шедеврів кінематографу! Прекрасний сюжет, хороша картинка, витончена кожна деталь фільму.",
+        userID: "",
     },
   ]);
 
@@ -43,7 +45,7 @@ const MoviePage = ({ film }) => {
       let allReviews = [];
       for (let user in reviewsObject) {
         if (reviewsObject[user][movieId]) {
-          allReviews = [...allReviews, ...reviewsObject[user][movieId]];
+            allReviews = [...allReviews, ...reviewsObject[user][movieId].map(review => ({...review, userID: user}))];
         }
       }
       setReviews(prevReviews => [...allReviews, ...prevReviews]);
@@ -63,6 +65,7 @@ const MoviePage = ({ film }) => {
     }, 50);
   };
 
+
   const handleReviewSubmit = (e) => {
     e.preventDefault();
     if (review.trim() === "") return; // Prevent empty reviews
@@ -72,6 +75,7 @@ const MoviePage = ({ film }) => {
       user: userName,
       rating,
       comment: review,
+      userID: userId
     };
 
     setReviews(prevReviews => [newReview, ...prevReviews]);
@@ -93,13 +97,26 @@ const MoviePage = ({ film }) => {
   reviewsObject[userId][movieId].push(newReview);
 
   localStorage.setItem('reviews', JSON.stringify(reviewsObject));
+
+  setReview('');
+  setRating(1);
 };
 
-  const handleDeleteReview = (reviewId) => {
-    // Filter out the review to delete based on its id
-    const updatedReviews = reviews.filter((review) => review.id !== reviewId);
-    setReviews(updatedReviews);
-  };
+const handleDeleteReview = (reviewId) => {
+  let storedReviews = JSON.parse(localStorage.getItem('reviews'));
+
+  for (let userId in storedReviews) {
+    for (let movieId in storedReviews[userId]) {
+      storedReviews[userId][movieId] = storedReviews[userId][movieId].filter(review => review.id !== reviewId);
+    }
+  }
+
+  localStorage.setItem('reviews', JSON.stringify(storedReviews));
+
+  // Filter out the review to delete based on its id
+  const updatedReviews = reviews.filter((review) => review.id !== reviewId);
+  setReviews(updatedReviews);
+};
 
   const navigate = useNavigate();
   const handleTicketBuy = (ticketId) => {
@@ -192,7 +209,7 @@ const MoviePage = ({ film }) => {
               </p>
               <p>{review.comment}</p>
               {/* Display delete button only for user's own reviews */}
-              {review.user === "Guest" && (
+              {review.userID === userId && (
                 <a
                   id="delete-button"
                   onClick={() => handleDeleteReview(review.id)}

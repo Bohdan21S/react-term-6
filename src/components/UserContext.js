@@ -21,6 +21,7 @@ const UserProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem('loggedInUser');
+    window.location.reload();
   };
 
   return (
