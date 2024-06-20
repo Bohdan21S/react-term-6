@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { SeatSelectionContext } from "./SeatSelectionContext";
 import "../assets/styles/SeatSelection.css";
 import Header from "../components/Header";
+import Ticket from "../components/Ticket";
 
 const SeatSelection = () => {
   const { selectedSeats, setSelectedSeats, ticketInfo } =
@@ -21,6 +22,10 @@ const SeatSelection = () => {
   const handlePurchase = () => {
     const loggedInUser = localStorage.getItem("loggedInUser");
     if (loggedInUser) {
+      if (selectedSeats.length === 0) {
+        alert("Виберіть квиток!");
+        return;
+      }
       const updatedTicketInfo = {
         ticketInfo,
         selectedSeats: selectedSeats
@@ -33,6 +38,10 @@ const SeatSelection = () => {
       allTicketsInfo[userId].push(updatedTicketInfo);
       localStorage.setItem('ticketsInfo', JSON.stringify(allTicketsInfo));
       sessionStorage.removeItem("selectedSeats");
+      setSelectedSeats([]);
+      setTimeout(() => {
+        alert("Квитки успішно придбані!");
+      }, 300);   
     } else {
       alert("Для покупки квитків увійдіть в акаунт");
       window.location.href = "/login";
@@ -43,14 +52,7 @@ const SeatSelection = () => {
     <div className="seat-selection-page">
       <Header />
       <div className="content">
-        <div className="ticket-info" back>
-          <p>{ticketInfo.movieTitle}</p>
-          <p>Зал: {ticketInfo.hallName}</p>
-          <p>Дата: {ticketInfo.date}</p>
-          <p>Початок: {ticketInfo.time}</p>
-          <p>Місця: {selectedSeats.sort((a, b) => a - b).join(", ")}</p>
-          <p>Сума: {selectedSeats.length * ticketInfo.price} грн</p>
-        </div>
+        <Ticket ticketInfo={ticketInfo} selectedSeats={selectedSeats}/>
         <div className="seat-map-container">
           <div className="screen">Екран</div>
           <div className="seat-map">

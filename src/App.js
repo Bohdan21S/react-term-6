@@ -5,6 +5,7 @@ import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import NewsPage from "./pages/NewsPage";
 import MoviePage from "./pages/MoviePage";
+import MyProfilePage from "./pages/MyProfilePage";
 
 import { useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
@@ -138,6 +139,7 @@ function App() {
                 </SeatSelectionProvider>
               }
             />
+            <Route path="/profile" element={<MyProfilePage />}/>
           </Routes>
         </div>
       </Router>

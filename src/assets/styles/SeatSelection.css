@@ -14,27 +14,6 @@
   margin-inline-start: 5%;
 }
 
-.ticket-info {
-  color: #c5b9b9;
-  font-family: Tahoma;
-  font-weight: bold;
-  font-size: 2.9vh;
-  width: 25%;
-  padding: 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #c9986800;
-  display: flex;
-  flex-direction: column;
-  padding: 3%;
-  align-items: center;
-  background-color: none;
-  background-image: url("../images/ticket-img.png");
-  background-size: 85% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
 .seat-map-container {
   width: 60%;
 }
@@ -80,16 +59,26 @@
 
 .purchase-button {
   display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background-color: #ff9800;
-  color: #fff;
-  border: none;
+  border-radius: 5px;
+  color: white;
   cursor: pointer;
-  font-size: 18px;
-  transition: background-color 0.3s;
+  font-size: 3vh;
+  margin: 20px auto;
+  padding: 10px 10px;
+  width: 10%;
+  aspect-ratio: 7/1;
+  background-color: rgba(81, 78, 131, 0.7);
+  border: 0;
 }
 
-.purchase-button:hover {
-  background-color: #e68900;
+.purchase-button:hover{
+  background-color: rgba(81, 78, 131, 0.9);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+
 }
+
+.purchase-button:active {
+  transform: scale(0.95);
+  --bs-btn-active-bg: rgba(81, 78, 131, 0.9);
+}
+
