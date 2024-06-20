@@ -10,9 +10,9 @@ import MyProfilePage from "./pages/MyProfilePage";
 import { useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 
-import { SeatSelectionProvider } from "./pages/SeatSelectionContext";
+import { SeatSelectionProvider } from "./context/SeatSelectionContext";
 import SeatSelection from "./pages/SeatSelection";
-import { UserProvider } from "./components/UserContext";
+import { UserProvider } from "./context/UserContext";
 
 function ScrollToTop() {
   const { pathname } = useLocation();

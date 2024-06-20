@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
-import { UserContext } from './UserContext';
+import { UserContext } from '../context/UserContext';
 import '../assets/styles/Header.css';
 
 const Header = () => {

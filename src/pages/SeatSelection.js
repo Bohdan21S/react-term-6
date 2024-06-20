@@ -1,6 +1,6 @@
 // src/components/SeatSelection.js
 import React, { useContext } from "react";
-import { SeatSelectionContext } from "./SeatSelectionContext";
+import { SeatSelectionContext } from "../context/SeatSelectionContext";
 import "../assets/styles/SeatSelection.css";
 import Header from "../components/Header";
 import Ticket from "../components/Ticket";
